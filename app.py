@@ -222,7 +222,6 @@ def account():
 
 
 # PENCARIAN
-
 @app.route("/cari/", methods=["GET", "POST"])
 def pencarian():
     if 'username' in session:
