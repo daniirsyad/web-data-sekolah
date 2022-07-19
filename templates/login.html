@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      src="https://kit.fontawesome.com/a1284d802f.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/main.css') }}"
+    />
+    <script
+      src="https://kit.fontawesome.com/a1284d802f.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Masuk</title>
+    <link rel="icon" type="image/x-icon" href="{{ icon }}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body class="h-full mx-0 my-0 bg-gray-50 font-mono">
+    <div class="container mx-auto h-screen px-4 bg-gray-50">
+      <div class="flex justify-center items-center h-full bg-gray-50">
+        <div
+          class="px-3 py-4 mt-5 bg-gray-50 rounded-lg box-shadow border-2 border-gray-100"
+        >
+          {% with messages = get_flashed_messages(with_categories=true) %} {%
+          for category,message in messages %}
+          <div
+            class="{% if category =='failed' %} bg-red-500 border-red-700 {% elif category == 'success' %} bg-green-500 border-gren-700 {% endif %} rounded-md border-2 py-1 text-center text-white w-full text-xs"
+          >
+            <span>{{ message }}</span>
+          </div>
+
+          {% endfor %} {% endwith %}
+          <div class="mb-6 text-3xl flex justify-center">
+            <span class="text-red-500">Silahkan </span><span>_</span
+            ><span class="text-blue-500">Masuk</span><span>!</span>
+          </div>
+          <form action="/login" method="post">
+            <div class="mb-3 px-5">
+              <label for="username" class="font-bold text-gray-600"
+                >Username</label
+              >
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                class="bg-gray-200 rounded outline-none w-full max-w-sm py-2 px-3 text-gray-600 focus:outline-none placeholder:focus:text-transparent placeholder:transition-all duration-300"
+                required
+              />
+            </div>
+            <div class="mb-3 px-5">
+              <label for="password" class="font-bold text-gray-600"
+                >Password</label
+              >
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                class="bg-gray-200 rounded outline-none w-full max-w-sm py-2 px-3 text-gray-600 focus:outline-none placeholder:focus:text-transparent placeholder:transition-all duration-300"
+                required
+              />
+            </div>
+            <div class="mb-3 px-5 flex justify-end">
+              <button
+                type="submit"
+                class="bg-blue-400 border-4 border-blue-400 font-semibold hover:text-gray-100 hover:bg-blue-500 hover:border-blue-500 rounded px-5 py-1 text-white active:bg-blue-600 active:border-blue-700 transition-all duration-300"
+              >
+                Masuk
+              </button>
+            </div>
+            <div class="flex justify-center">
+              <span>Belum punya akun? </span
+              ><a
+                href="{{ url_for('signup') }}"
+                class="text-blue-600 underline"
+                title="Daftar akun baru!"
+                >daftar</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+      {%include 'bubble.html'%}
+    </div>
+  </body>
+</html>

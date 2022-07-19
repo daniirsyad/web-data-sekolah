@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block head %} {% endblock %} {% block body %}
+<div class="container">
+  <div class="flex justify-center">
+    <div class="mt-5 py-4">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% for
+      category,message in messages %}
+      <div
+        class="{% if category =='failed' %} bg-red-500 border-red-700 {% elif category == 'success' %} bg-green-500 border-gren-700 {% endif %} rounded-md border-2 py-1 text-center text-white w-full text-xs"
+      >
+        <span>{{ message }}</span>
+      </div>
+
+      {% endfor %} {% endwith %}
+      <div class="mb-5 flex justify-center">
+        <h1 class="text-2xl underline font-semibold text-gray-800">
+          Profile Saya
+        </h1>
+      </div>
+      <form action="/account" method="post">
+        <div class="flex justify-between mb-2">
+          <label for="nama" class="self-center">Nama</label>
+          <input
+            type="text"
+            name="nama"
+            class="ml-3 bg-gray-100 outline-none active:outline-none px-3 py-2 rounded-md"
+            placeholder="Nama lengkap"
+            value="{{ data.nama or '' }}"
+          />
+        </div>
+        <div class="flex justify-between mb-2">
+          <label for="email" class="self-center">E-mail</label>
+          <input
+            type="email"
+            name="email"
+            class="ml-3 bg-gray-100 outline-none active:outline-none px-3 py-2 rounded-md"
+            placeholder="E-mail"
+            value="{{ data.email }}"
+          />
+        </div>
+        <div class="flex justify-between mb-2">
+          <label for="username" class="self-center">Username</label>
+          <input
+            type="text"
+            name="username"
+            class="ml-3 bg-yellow-100 outline-none active:outline-none px-3 py-2 rounded-md text-gray-500"
+            placeholder="Username"
+            value="{{ data.username }}"
+            disabled
+          />
+        </div>
+        <div class="flex justify-between mb-2">
+          <label for="role" class="self-center">Role</label>
+          <input
+            type="text"
+            name="role"
+            class="ml-3 bg-yellow-100 outline-none active:outline-none px-3 py-2 rounded-md text-gray-500"
+            value="{{ data.role }}"
+            placeholder="Your Role"
+            disabled
+          />
+        </div>
+        <div class="flex justify-between mb-2">
+          <label for="password" class="self-center">Old Password</label>
+          <input
+            type="password"
+            name="password"
+            class="ml-3 bg-gray-100 outline-none active:outline-none px-3 py-2 rounded-md"
+            placeholder="Password"
+          />
+        </div>
+        <div class="flex justify-between mb-2">
+          <label for="npassword" class="self-center">New Password</label>
+          <input
+            type="password"
+            name="npassword"
+            class="ml-3 bg-gray-100 outline-none active:outline-none px-3 py-2 rounded-md"
+            placeholder="Password"
+          />
+        </div>
+        <div class="flex justify-end mb-2">
+          <button
+            type="submit"
+            class="bg-blue-400 border-4 border-blue-400 font-semibold hover:text-gray-100 hover:bg-blue-500 hover:border-blue-500 rounded px-5 py-1 text-white active:bg-blue-600 active:border-blue-700 transition-all duration-300"
+          >
+            Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,119 @@
+<aside id="sidebarroot" class="w-64 sm:w-64 relative">
+  <div
+    id="showbtn"
+    class="absolute flex justify-center cursor-pointer rounded-full border-2 border-gray-800 text-xl px-1 bg-gray-50 -right-6 top-40 sm:hidden"
+  >
+    <i class="fas fa-angle-right"></i>
+  </div>
+  <div class="overflow-x-hidden">
+    <div class="overflow-y-auto py-4 px-3 bg-gray-100 block h-">
+      <ul class="space-y-2">
+        <li>
+          <a
+            href="/"
+            class="flex item-center p-2 text-base rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700 bg-gray-200 text-gray-700"
+            ><div class="flex items-center ml-3">
+              <i class="fas fa-columns"></i>
+            </div>
+            <span class="ml-3">Profile Siswa</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/raporsiswa"
+            class="flex item-center p-2 text-base rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700 bg-gray-200 text-gray-700"
+            ><div class="flex items-center ml-3">
+              <i class="fas fa-columns"></i>
+            </div>
+            <span class="ml-3">Rapor Siswa</span>
+          </a>
+        </li>
+        <li>
+          <button
+            type="button"
+            id="dropdownbtn"
+            class="flex items-center p-2 w-full text-base bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
+          >
+            <div class="flex items-center ml-3">
+              <i class="fas fa-users"></i>
+            </div>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap">Manager</span>
+            <i id="dropdownarrow" class="fas fa-caret-down"></i>
+          </button>
+          <ul id="dropdown-ul-1" class="space-y-2 overflow-hidden">
+            <li>
+              <a
+                href="#"
+                class="flex items-center ml-11 p-2 pl-3 text-base text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
+                ><div class="flex items-center ml-3">
+                  <i class="fas fa-user"></i>
+                </div>
+                <span class="ml-3"> User Manager </span></a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center ml-11 p-2 pl-3 text-base text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
+                ><div class="flex items-center ml-3">
+                  <i class="fas fa-key"></i>
+                </div>
+                <span class="ml-3"> Role Manager </span></a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a
+            href="#"
+            class="flex item-center p-2 text-base text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
+          >
+            <div class="flex items-center ml-3">
+              <i class="fas fa-database"></i>
+            </div>
+            <span class="ml-3"> Database </span>
+          </a>
+        </li>
+      </ul>
+      <ul class="space-y-2 border-t border-gray-600">
+        <li>
+          <a
+            href="/logout"
+            class="flex item-center p-2 text-base text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
+          >
+            <div class="flex items-center ml-3">
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <span class="ml-3"> Keluar </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>
+<script>
+  $(document).ready(function () {
+    $("#showbtn").click(function () {
+      $("#sidebarroot").toggleClass("w-0");
+    });
+    $("#dropdownbtn").click(function () {
+      var x = $("ul#dropdown-ul-1 li").length * 50 + 16;
+      if ($("#dropdownbtn").hasClass("bg-gray-200")) {
+        $("#dropdownbtn").removeClass("bg-gray-200 text-gray-700");
+        $("#dropdownbtn").addClass("bg-gray-100 text-gray-600");
+        $("#dropdown-ul-1").animate({
+          height: "toggle",
+        });
+        $("#dropdownarrow").removeClass("rotate-180");
+      } else {
+        $("#dropdownbtn").addClass("bg-gray-200 text-gray-700");
+        $("#dropdownbtn").removeClass("bg-gray-100 text-gray-600");
+        $("#dropdown-ul-1").animate({
+          height: "toggle",
+        });
+        $("#dropdownarrow").addClass("rotate-180");
+      }
+    });
+  });
+</script>

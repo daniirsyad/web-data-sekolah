@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.box-shadow {
+  box-shadow: 0.3rem 0.3rem rgba(0, 0, 0, 0.5);
+}
+.h-screen-md {
+  height: 65vh;
+}

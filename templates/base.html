@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/a1284d802f.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>{{ title }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ icon }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <!-- Start Head -->
+    {% block head %}{% endblock %}
+    <!-- End Head -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body class="font-mono">
+    {% include 'header.html' %}
+    <div class="flex">
+      <div class="bg-gray-100">{% include 'sidebar.html' %}</div>
+      <div class="container px-4 py-10 overflow-y-hidden">
+        <!-- Start Body -->
+        {% block body %} {% endblock %}
+        <!-- End Body -->
+      </div>
+    </div>
+    {% include 'bubble.html' %} {% include 'footer.html' %}
+  </body>
+</html>

@@ -1,0 +1,382 @@
+<div class="fixed inset-0 h-screen w-screen bg-gray-900 bg-opacity-50">
+  <div class="relative flex h-screen w-screen items-center justify-center p-5">
+    <div
+      class="relative my-3 w-11/12 overflow-hidden rounded-xl bg-white p-4 sm:w-10/12 md:w-8/12 lg:w-3/5"
+    >
+      <div class="flex items-center justify-between bg-white pb-5">
+        <h1 class="text-2xl font-bold">DATA SISWA</h1>
+        <button class="closemodal" type="button" title="close">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <form action="/updatesiswa" method="POST" id="formdata">
+        <div
+          class="h-screen-md relative overflow-y-auto rounded-lg border-2 py-3 shadow-inner shadow-gray-200"
+        >
+          <div class="absolute h-full px-3 w-full">
+            <div class="mb-3 w-full" id="cnis">
+              <label
+                for="nis"
+                class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                >NIS</label
+              >
+              <input
+                type="text"
+                name="nis"
+                placeholder="Nomor Induk Siswa"
+                class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                value=""
+                required
+                disabled
+              />
+            </div>
+            <div class="mb-3 w-full" id="cnama">
+              <label
+                for="nama"
+                class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                >Nama</label
+              >
+              <input
+                type="text"
+                name="nama"
+                placeholder="Nama Siswa"
+                class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                value=""
+                required
+              />
+            </div>
+            <div class="mb-3 grid grid-cols-2 gap-2">
+              <div class="w-full" id="ctempatlahir">
+                <label
+                  for="tempatlahir"
+                  class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                  >Tempat Lahir</label
+                >
+                <input
+                  type="text"
+                  name="tempatlahir"
+                  placeholder="Tempat Lahir"
+                  class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                  value=""
+                  required
+                />
+              </div>
+              <div class="w-full" id="ctanggallahir">
+                <label
+                  for="tanggallahir"
+                  class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                  >Tanggal Lahir</label
+                >
+                <input
+                  type="date"
+                  name="tanggallahir"
+                  placeholder="date"
+                  class="w-full rounded-md border-2 bg-gray-50 px-3 py-0.5 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
+            <div class="mb-3 w-full" id="cjeniskelamin">
+              <label
+                for="jeniskelamin"
+                class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                >Jenis Kelamin</label
+              >
+              <select
+                name="jeniskelamin"
+                id="jeniskelamin"
+                aria-label="Pilih Jenis Kelamin"
+                class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                data-value=""
+                required
+              >
+                <option selected class="text-gray-400">
+                  Pilih Jenis Kelamin
+                </option>
+                {% for row_jeniskelamin in data_jeniskelamin %}
+                <option value="{{ row_jeniskelamin.id }}">
+                  {{ row_jeniskelamin.keterangan }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3 w-full" id="cagama">
+              <label
+                for="agama"
+                class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                >Agama</label
+              >
+              <select
+                name="agama"
+                aria-label="Pilih Agama"
+                class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                data-value=""
+                required
+              >
+                <option selected class="text-gray-400">Pilih Agama</option>
+                {% for row_agama in data_agama %}
+                <option value="{{ row_agama.id }}">
+                  {{ row_agama.keterangan }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mt-6 rounded-xl border-2 p-2" id="corangtua">
+              <div class="absolute -mt-6 rounded-md border-2 bg-white px-3">
+                <span class="font-base">Orang Tua</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="mb-3 w-full" id="cnamaayah">
+                  <label
+                    for="namaayah"
+                    class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                    >Nama Ayah</label
+                  >
+                  <input
+                    type="text"
+                    name="namaayah"
+                    placeholder="Nama Ayah"
+                    class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    value=""
+                    required
+                  />
+                </div>
+                <div class="mb-3 w-full" id="cnamaibu">
+                  <label
+                    for="namaibu"
+                    class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                    >Nama Ibu</label
+                  >
+                  <input
+                    type="text"
+                    name="namaibu"
+                    placeholder="Nama Ibu"
+                    class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    value=""
+                    required
+                  />
+                </div>
+                <div class="mb-3 w-full" id="cnamawali">
+                  <label for="namawali">Nama Wali</label>
+                  <input
+                    type="text"
+                    name="namawali"
+                    placeholder="Nama Wali"
+                    class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    value=""
+                  />
+                </div>
+                <div class="mb-3 w-full" id="ckontakwali">
+                  <label
+                    for="kontakwali"
+                    class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                    >Kontak Orang Tua/Wali</label
+                  >
+                  <input
+                    type="tel"
+                    name="kontakwali"
+                    placeholder="Kontak Wali"
+                    class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    value=""
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end relative mt-3" id="cceditalamat">
+              <input
+                type="checkbox"
+                name="editalamat"
+                id="editalamat"
+                class="peer hidden"
+              />
+              <label
+                for="editalamat"
+                id="leditalamat"
+                class="peer cursor-pointer rounded-lg bg-blue-500 px-5 py-2 font-semibold text-white transition-all duration-300 peer-checked:bg-red-500"
+                >Ubah</label
+              >
+            </div>
+
+            <div class="mb-3 w-full" id="calamatlengkap">
+              <label for="alamatlengkap">Alamat Lengkap</label>
+              <textarea
+                name="alamatlengkap"
+                id="alamatlengkap"
+                placeholder="Alamat Lengkap"
+                class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                disabled
+              ></textarea>
+            </div>
+            <div class="overflow-hidden" id="ceditalamatlengkap">
+              <div class="mb-3 w-full" id="cjalan">
+                <label
+                  for="jalan"
+                  class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                  >Jalan</label
+                >
+                <textarea
+                  name="jalan"
+                  placeholder="Nama Jalan"
+                  class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                ></textarea>
+              </div>
+              <div class="mb-3 grid gap-2 lg:grid-cols-2">
+                <div class="w-full" id="cprovinsi">
+                  <label
+                    for="provinsi"
+                    class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                    >Provinsi</label
+                  >
+                  <select
+                    name="provinsi"
+                    aria-label="Pilih Provinsi"
+                    data-nis=""
+                    class="pilih-provinsi w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    required
+                  >
+                    <option selected class="text-gray-400">
+                      Pilih Provinsi
+                    </option>
+                    {% for row_prov in data_provinsi %}
+                    <option value="{{ row_prov.id }}">
+                      {{ row_prov.name }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="w-full" id="ckota">
+                  <label
+                    for="kota"
+                    class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                    >Kota</label
+                  >
+                  <select
+                    name="kota"
+                    data-nis=""
+                    aria-label="Pilih Kota"
+                    class="pilih-kabupaten w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    required
+                  >
+                    <option selected class="text-gray-400">Pilih Kota</option>
+                  </select>
+                </div>
+                <div class="w-full" id="ckecamatan">
+                  <label
+                    for="kecamatan"
+                    class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                    >Kecamatan</label
+                  >
+                  <select
+                    name="kecamatan"
+                    data-nis=""
+                    aria-label="Pilih Kecamatan"
+                    class="pilih-kecamatan w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    required
+                  >
+                    <option selected class="text-gray-400">
+                      Pilih Kecamatan
+                    </option>
+                  </select>
+                </div>
+                <div class="w-full" id="cdesa">
+                  <label
+                    for="desa"
+                    class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                    >Desa</label
+                  >
+                  <select
+                    name="desa"
+                    data-nis=""
+                    aria-label="Pilih Desa"
+                    class="pilih-desa w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                    required
+                  >
+                    <option selected class="text-gray-400">Pilih Desa</option>
+                  </select>
+                </div>
+                <div class="mb-3 grid grid-cols-3 gap-2">
+                  <div class="w-full" id="crt">
+                    <label
+                      for="rt"
+                      class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                      >RT</label
+                    >
+                    <input
+                      type="number"
+                      name="rt"
+                      placeholder="RT"
+                      class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                      value=""
+                      required
+                    />
+                  </div>
+                  <div class="w-full" id="crw">
+                    <label
+                      for="rw"
+                      class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                      >RW</label
+                    >
+                    <input
+                      type="number"
+                      name="rw"
+                      placeholder="RW"
+                      class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                      value=""
+                      required
+                    />
+                  </div>
+                  <div class="w-full" id="ckodepos">
+                    <label
+                      for="kodepos"
+                      class="after:ml-0.5 after:text-sm after:font-medium after:text-red-500 after:content-['*']"
+                      >Kode Pos</label
+                    >
+                    <input
+                      type="number"
+                      name="kodepos"
+                      placeholder="Kode Pos"
+                      value=""
+                      class="w-full rounded-md border-2 bg-gray-50 px-3 py-1 outline-none placeholder:transition-all placeholder:duration-300 focus:outline-none placeholder:focus:text-transparent"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative flex justify-end py-3">
+          <div class="flex justify-between gap-2">
+            <button
+              class="closemodal btn-close-modal rounded-md bg-red-500 py-2 px-3 text-white hover:bg-red-600"
+              type="button"
+            >
+              Batal
+            </button>
+            <button
+              class="rounded-md bg-blue-500 py-2 px-3 text-white hover:bg-blue-600"
+              type="submit"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div
+  class="fixed bottom-3 right-3 border-2 border-green-700 rounded-lg py-2 bg-green-300 text-center box-shadow"
+>
+  <div id="after" class="h-0 overflow-hidden relative">
+    <div class="absolute top-0 right-2 cursor-pointer">
+      <a id="close"><i class="fas fa-times text-green-700"></i></a>
+    </div>
+    <div class="mb-3 mt-3">
+      <span class="text-xl underline font-bold text-green-700"
+        >"Buat Pesan"</span
+      >
+    </div>
+    <form action="">
+      <div class="px-3">
+        <input
+          type="text"
+          name="nama"
+          placeholder="Masukkan Nama"
+          required
+          class="w-full outline-none focus:outline-none border-2 border-green-700 px-2"
+        />
+      </div>
+      <div class="px-3 py-2">
+        <textarea
+          class="outline-none focus:outline border-2 border-green-700 p-2"
+          name="message"
+          id="message"
+          cols="20"
+          rows="6"
+          placeholder="Tulis Pesan disini"
+        ></textarea>
+      </div>
+      <div class="flex justify-end px-3">
+        <button
+          type="submit"
+          class="bg-green-700 px-3 py-2 mb-3 text-white border-2 border-green-700 hover:bg-green-800 active:bg-green-800"
+        >
+          Buat Pesan
+        </button>
+      </div>
+    </form>
+  </div>
+  <div id="before" class="flex justify-center overflow-hidden">
+    <button
+      id="hubungibtn"
+      class="text-green-700 font-semibold text-lg bg-transparent flex"
+      title="Hubungi kami melalui whatsapp!"
+    >
+      <div class="px-3">
+        <i class="fab fa-whatsapp text-2xl text-green-700"></i>
+      </div>
+      Hubungi Kami!
+    </button>
+  </div>
+
+  <script>
+    var button = document.getElementById("before");
+    var form = document.getElementById("after");
+
+    $(document).ready(function () {
+      $("#hubungibtn").click(function () {
+        $("#after").animate({ height: "323px" });
+        $("#before").animate({ height: "0px" });
+      });
+      $("#close").click(function () {
+        $("#after").animate({ height: "0px" });
+        $("#before").animate({ height: "33px" });
+      });
+    });
+  </script>
+</div>
