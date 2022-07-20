@@ -34,6 +34,8 @@ def home():
 
     return redirect(url_for("login"))
 
+# Route untuk Login, Logout, dan SignUp
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -54,6 +56,38 @@ def login():
         session['username'] = fusername
         return redirect(url_for('home'))
     return render_template("login.html", icon=icon)
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if 'username' in session:
+        username = session['username']
+        return redirect(url_for('home'))
+
+    if request.method == "POST":
+        femail = request.form.get("email")
+        fusername = request.form.get("username")
+        fpassword = request.form.get("password")
+        hashed_password = hashlib.sha256(fpassword.encode()).hexdigest()
+
+        try:
+            models.User.get(models.User.username == fusername)
+        except peewee.DoesNotExist:
+            models.User.create(
+                email=femail, username=fusername, password=hashed_password)
+            flash("Berhasil membuat akun!", "success")
+            return redirect(url_for("login"))
+        flash("Username sudah digunakan!", "failed")
+        return redirect(url_for("signup"))
+
+    return render_template("signup.html", icon=icon)
+
+
+@app.route("/logout")
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
+# End
 
 
 @app.route("/addsiswa", methods=["POST"])
@@ -155,37 +189,6 @@ def raporsiswa():
         return render_template("rapor.html", icon=icon, title="Rapor Siswa", data=data)
     else:
         return redirect(url_for("login"))
-
-
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    if 'username' in session:
-        username = session['username']
-        return redirect(url_for('home'))
-
-    if request.method == "POST":
-        femail = request.form.get("email")
-        fusername = request.form.get("username")
-        fpassword = request.form.get("password")
-        hashed_password = hashlib.sha256(fpassword.encode()).hexdigest()
-
-        try:
-            models.User.get(models.User.username == fusername)
-        except peewee.DoesNotExist:
-            models.User.create(
-                email=femail, username=fusername, password=hashed_password)
-            flash("Berhasil membuat akun!", "success")
-            return redirect(url_for("login"))
-        flash("Username sudah digunakan!", "failed")
-        return redirect(url_for("signup"))
-
-    return render_template("signup.html", icon=icon)
-
-
-@app.route("/logout")
-def logout():
-    session.pop('username', None)
-    return redirect(url_for('login'))
 
 
 @app.route("/account", methods=["GET", "POST"])
