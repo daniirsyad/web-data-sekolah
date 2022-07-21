@@ -4,7 +4,7 @@ from unittest import result
 from importlib_metadata import method_cache
 from playhouse.shortcuts import model_to_dict
 import peewee
-from flask import Flask, flash, jsonify, render_template, request, url_for, redirect, session
+from flask import Flask, flash, jsonify, render_template, request, request_started, url_for, redirect, session
 from jinja2 import Template
 
 from api import *
@@ -196,8 +196,27 @@ def raporsiswa():
     if 'username' in session:
         data = models.Siswa.select()
         return render_template("rapor.html", icon=icon, title="Rapor Siswa", data=data)
-    else:
-        return redirect(url_for("login"))
+    return redirect(url_for("login"))
+
+
+@app.route("/raporsiswa/update/<nis>", methods=["GET", "POST"])
+def updateRaporSiswa(nis):
+    if 'username' in session:
+        fnis = nis
+        fsemester = request.form.get("semester")
+        fmtk = request.form.get("mtk")
+        fipa = request.form.get("ipa")
+        fips = request.form.get("ips")
+        fbindo = request.form.get("bindo")
+        fbingg = request.form.get("bingg")
+        ffisika = request.form.get("fisika")
+        fkimia = request.form.get("kimia")
+        fsejarah = request.form.get("sejarah")
+
+        models.Nilai.update(mtk=fmtk, ipa=fipa, ips=fips, bindo=fbindo, bingg=fbingg, fisika=ffisika,
+                            kimia=fkimia, sejarah=fsejarah).where(models.Nilai.nis == fnis, models.Nilai.semester == fsemester).execute()
+        flash("Berhasil Merubah Data", "success")
+        return redirect(url_for("raporsiswa"))
 
 
 @app.route("/account", methods=["GET", "POST"])

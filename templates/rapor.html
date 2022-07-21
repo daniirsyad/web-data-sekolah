@@ -2,6 +2,7 @@
 <div class="flex justify-center">
   <h1 class="text-2xl font-semibold">Halaman Rapor</h1>
 </div>
+<!-- Pencarian -->
 <div class="flex justify-center my-5">
   <form action="/raporsiswa/cari" method="POST">
     <div class="flex">
@@ -39,6 +40,18 @@
     </div>
   </form>
 </div>
+<!-- End Pencarian -->
+<!-- Flash Message -->
+{% with messages = get_flashed_messages(with_categories=true) %} {% for
+category,message in messages %}
+<div
+  class="{% if category =='failed' %} bg-red-500 border-red-700 {% elif category == 'success' %} bg-green-500 border-gren-700 {% endif %} rounded-md border-2 py-1 text-center text-white w-full text-xs"
+>
+  <span>{{ message }}</span>
+</div>
+
+{% endfor %} {% endwith %}
+<!-- End Flash Message -->
 <div class="container">
   {% for row in data %}
   <div class="flex py-1 justify-center">
@@ -77,7 +90,7 @@
         <div id="row-rapor-{{ row.nis }}" class="h-0 overflow-hidden">
           <div class="h-64 w-full bg-white my-3 shadow-inner overflow-x-auto">
             <!-- Inside Container -->
-            <div class="">
+            <div class="p-3">
               <table class="table-auto">
                 <tr class="bg-gray-300">
                   <th class="border-2 border-gray-400 bg-gray-400 px-3">
@@ -91,37 +104,96 @@
                   <th class="border-2 border-gray-400 px-3">Fisika</th>
                   <th class="border-2 border-gray-400 px-3">Kimia</th>
                   <th class="border-2 border-gray-400 px-3">Sejarah</th>
+                  <th class="border-2 border-gray-400 px-3">Aksi</th>
                 </tr>
                 {% for rowNilai in getNilai(row.nis) %}
-                <tr>
-                  <td class="border-2 border-gray-300 bg-gray-300 text-center">
-                    Semester {{ rowNilai.semester }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.mtk or 0 }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.ipa or 0 }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.ips or 0 }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.bindo or 0 }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.bingg or 0 }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.fisika or 0 }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.kimia or 0 }}
-                  </td>
-                  <td class="border-2 border-gray-300 text-center">
-                    {{ rowNilai.sejarah or 0 }}
-                  </td>
-                </tr>
+                <form action="/raporsiswa/update/{{ row.nis }}" method="POST">
+                  <tr>
+                    <td
+                      class="border-2 border-gray-300 bg-gray-300 text-center"
+                    >
+                      Semester {{ rowNilai.semester }}
+                      <input
+                        type="text"
+                        name="semester"
+                        value="{{ rowNilai.semester }}"
+                        class="bg-transparent w-10"
+                        hidden
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="mtk"
+                        value="{{ rowNilai.mtk or 0 }}"
+                        class="text-center w-10"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="ipa"
+                        class="text-center w-10"
+                        value="{{ rowNilai.ipa or 0 }}"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="ips"
+                        class="text-center w-10"
+                        value="{{ rowNilai.ips or 0 }}"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="bindo"
+                        class="text-center w-10"
+                        value="{{ rowNilai.bindo or 0 }}"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="bingg"
+                        class="text-center w-10"
+                        value="{{ rowNilai.bingg or 0 }}"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="fisika"
+                        class="text-center w-10"
+                        value="{{ rowNilai.fisika or 0 }}"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="kimia"
+                        class="text-center w-10"
+                        value="{{ rowNilai.kimia or 0 }}"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="text"
+                        name="sejarah"
+                        class="text-center w-10"
+                        value="{{ rowNilai.sejarah or 0 }}"
+                      />
+                    </td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="submit"
+                        value="Simpan"
+                        class="px-2 py-1 rounded-md bg-blue-500 text-white m-1 cursor-pointer hover:bg-blue-600"
+                      />
+                    </td>
+                  </tr>
+                </form>
                 {% endfor %}
               </table>
             </div>

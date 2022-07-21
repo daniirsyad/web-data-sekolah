@@ -578,6 +578,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 10rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
 .mx-6 {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -1175,6 +1183,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
 }
 
 .py-4 {
