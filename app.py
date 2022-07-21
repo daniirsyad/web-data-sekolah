@@ -10,10 +10,20 @@ from jinja2 import Template
 from api import *
 import models
 
+# Function
+
+
+def getNilai(nis):
+    dataNilai = models.Nilai.select().where(
+        models.Nilai.nis == nis).order_by(models.Nilai.semester.asc())
+    return dataNilai
+
+
+# End Function
 app = Flask(__name__)
 app.secret_key = 'thisismyscretkey123333'
 app.jinja_env.globals.update(
-    getKabupaten=getKabupaten, getKecamatan=getKecamatan, getDesa=getDesa)
+    getKabupaten=getKabupaten, getKecamatan=getKecamatan, getDesa=getDesa, getNilai=getNilai)
 
 icon = "/static/images/icon.png"
 
@@ -184,7 +194,6 @@ def deletesiswa(nis):
 @app.route("/raporsiswa", methods=["POST", "GET"])
 def raporsiswa():
     if 'username' in session:
-        fusername = session['username']
         data = models.Siswa.select()
         return render_template("rapor.html", icon=icon, title="Rapor Siswa", data=data)
     else:

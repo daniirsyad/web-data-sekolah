@@ -1,4 +1,5 @@
 from peewee import *
+from sqlalchemy import Integer
 
 host = '192.168.2.251'
 user = 'dani'
@@ -62,6 +63,24 @@ class Siswa(Model):
     class Meta:
         database = db
         db_table = "tbl_siswa_profile"
+
+
+class Nilai(Model):
+    id = IntegerField()
+    nis = CharField()
+    mtk = CharField()
+    ipa = CharField()
+    ips = CharField()
+    bindo = CharField()
+    bingg = CharField()
+    fisika = CharField()
+    kimia = CharField()
+    sejarah = CharField()
+    semester = CharField()
+
+    class Meta:
+        database = db
+        db_table = "tbl_siswa_nilai"
 
 
 def initialize():

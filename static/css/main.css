@@ -812,10 +812,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 16.666667%;
 }
 
-.w-96 {
-  width: 24rem;
-}
-
 .w-64 {
   width: 16rem;
 }
@@ -949,10 +945,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .overflow-y-hidden {
   overflow-y: hidden;
-}
-
-.overflow-x-scroll {
-  overflow-x: scroll;
 }
 
 .whitespace-nowrap {

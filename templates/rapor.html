@@ -92,19 +92,37 @@
                   <th class="border-2 border-gray-400 px-3">Kimia</th>
                   <th class="border-2 border-gray-400 px-3">Sejarah</th>
                 </tr>
+                {% for rowNilai in getNilai(row.nis) %}
                 <tr>
                   <td class="border-2 border-gray-300 bg-gray-300 text-center">
-                    Semester 1
+                    Semester {{ rowNilai.semester }}
                   </td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
-                  <td class="border-2 border-gray-300 text-center">Test</td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.mtk or 0 }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.ipa or 0 }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.ips or 0 }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.bindo or 0 }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.bingg or 0 }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.fisika or 0 }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.kimia or 0 }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ rowNilai.sejarah or 0 }}
+                  </td>
                 </tr>
+                {% endfor %}
               </table>
             </div>
             <!-- End Container -->
