@@ -90,6 +90,107 @@ category,message in messages %}
         <div id="row-rapor-{{ row.nis }}" class="h-0 overflow-hidden">
           <div class="h-64 w-full bg-white my-3 shadow-inner overflow-x-auto">
             <!-- Inside Container -->
+            <div class="rounded-lg border-2 p-2">
+              <h3 class="text-xl bg-gray-400 text-center">Tambah Nilai</h3>
+              <form
+                action="/raporsiswa/add/{{ row.nis }}"
+                method="POST"
+                class="flex"
+              >
+                <div class="mx-4 flex items-center">
+                  <div>
+                    <label for="semester" class="block">Pilih Semester</label>
+                    <select name="semester" id="semester">
+                      <option value="1">Semester 1</option>
+                      <option value="2">Semester 2</option>
+                      <option value="3">Semester 3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="grid lg:grid-cols-4 gap-2 md:grid-cols-2">
+                  <div>
+                    <label for="mtk">Matematika</label>
+                    <input
+                      id="mtk"
+                      type="number"
+                      name="mtk"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                  <div>
+                    <label for="ipa">IPA</label>
+                    <input
+                      id="ipa"
+                      type="number"
+                      name="ipa"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                  <div>
+                    <label for="ips">IPS</label>
+                    <input
+                      id="ips"
+                      type="number"
+                      name="ips"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                  <div>
+                    <label for="bindo">B. Indonesia</label>
+                    <input
+                      id="bindo"
+                      type="number"
+                      name="bindo"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                  <div>
+                    <label for="bingg">B. Inggris</label>
+                    <input
+                      id="bingg"
+                      type="number"
+                      name="bingg"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                  <div>
+                    <label for="fisika">Fisika</label>
+                    <input
+                      id="fisika"
+                      type="number"
+                      name="fisika"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                  <div>
+                    <label for="kimia">Kimia</label>
+                    <input
+                      id="kimia"
+                      type="number"
+                      name="kimia"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                  <div>
+                    <label for="sejarah">Sejarah</label>
+                    <input
+                      id="sejarah"
+                      type="number"
+                      name="sejarah"
+                      class="block w-20 rounded-md border-2"
+                    />
+                  </div>
+                </div>
+                <div class="flex items-end">
+                  <input
+                    type="submit"
+                    value="Tambahkan"
+                    class="rounded-md bg-green-400 px-2 py-1 text-white hover:bg-green-500 cursor-pointer"
+                  />
+                </div>
+              </form>
+            </div>
+
             <div class="p-3">
               <table class="table-auto">
                 <tr class="bg-gray-300">

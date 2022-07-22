@@ -191,6 +191,7 @@ def deletesiswa(nis):
     return redirect(url_for("login"))
 
 
+# Halaman Rapor Siswa
 @app.route("/raporsiswa", methods=["POST", "GET"])
 def raporsiswa():
     if 'username' in session:
@@ -217,6 +218,30 @@ def updateRaporSiswa(nis):
                             kimia=fkimia, sejarah=fsejarah).where(models.Nilai.nis == fnis, models.Nilai.semester == fsemester).execute()
         flash("Berhasil Merubah Data", "success")
         return redirect(url_for("raporsiswa"))
+
+
+@app.route("/raporsiswa/add/<nis>", methods=["POST"])
+def addRaporSiswa(nis):
+    if 'username' in session:
+        fnis = nis
+        fsemester = request.form.get("semester")
+        fmtk = request.form.get("mtk")
+        fipa = request.form.get("ipa")
+        fips = request.form.get("ips")
+        fbindo = request.form.get("bindo")
+        fbingg = request.form.get("bingg")
+        ffisika = request.form.get("fisika")
+        fkimia = request.form.get("kimia")
+        fsejarah = request.form.get("sejarah")
+
+        models.Nilai.create(nis=fnis, semester=fsemester, mtk=fmtk, ipa=fipa, ips=fips, bindo=fbindo, bingg=fbingg, fisika=ffisika,
+                            kimia=fkimia, sejarah=fsejarah)
+        flash("Berhasil menambahkan Nilai pada nis "+fnis, "success")
+        return redirect(url_for("raporsiswa"))
+    return redirect(url_for("login"))
+# End Halaman Rapor Siswa
+
+# Halaman Akun
 
 
 @app.route("/account", methods=["GET", "POST"])
@@ -250,9 +275,11 @@ def account():
         data = models.User.get(models.User.username == fusername)
         return render_template("account.html", icon=icon, title="Akun saya", data=data)
     return redirect(url_for("login"))
-
+# End Halaman Akun
 
 # PENCARIAN
+
+
 @app.route("/cari/", methods=["GET", "POST"])
 def pencarian():
     if 'username' in session:
