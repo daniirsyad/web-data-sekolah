@@ -101,9 +101,11 @@ category,message in messages %}
                   <div>
                     <label for="semester" class="block">Pilih Semester</label>
                     <select name="semester" id="semester">
-                      <option value="1">Semester 1</option>
-                      <option value="2">Semester 2</option>
-                      <option value="3">Semester 3</option>
+                      {% for rowSemester in setListSemester(row.nis) %}
+                      <option value="{{ rowSemester }}">
+                        Semester {{ rowSemester }}
+                      </option>
+                      {% endfor %}
                     </select>
                   </div>
                 </div>

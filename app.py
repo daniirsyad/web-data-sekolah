@@ -19,11 +19,25 @@ def getNilai(nis):
     return dataNilai
 
 
+def setListSemester(nis):
+    fnis = nis
+    dataList = models.Nilai.select(
+        models.Nilai.semester).where(models.Nilai.nis == fnis).order_by(models.Nilai.semester.asc())
+    # Total Semester
+    dataSemester = ["1", "2", "3", "4", "5",
+                    "6", "7", "8", "9", "10", "11", "12"]
+    for x in dataList:
+        if x.semester in dataSemester:
+            dataSemester.remove(x.semester)
+    print(dataSemester)
+    return dataSemester
+
+
 # End Function
 app = Flask(__name__)
 app.secret_key = 'thisismyscretkey123333'
 app.jinja_env.globals.update(
-    getKabupaten=getKabupaten, getKecamatan=getKecamatan, getDesa=getDesa, getNilai=getNilai)
+    getKabupaten=getKabupaten, getKecamatan=getKecamatan, getDesa=getDesa, getNilai=getNilai, setListSemester=setListSemester)
 
 icon = "/static/images/icon.png"
 
