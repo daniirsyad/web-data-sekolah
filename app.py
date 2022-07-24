@@ -255,6 +255,62 @@ def addRaporSiswa(nis):
     return redirect(url_for("login"))
 # End Halaman Rapor Siswa
 
+# Halaman User Manager
+
+
+@app.route("/usermanager", methods=["GET"])
+def userManager():
+    if 'username' in session:
+        dataUser = models.User.select()
+        return render_template("accountManager.html", icon=icon, title="User Manager", data=dataUser)
+    return redirect(url_for("login"))
+
+
+@app.route("/usermanager/add", methods=["POST"])
+def addUser():
+    if 'username' in session:
+        frole = request.form.get("role")
+        fnama = request.form.get("nama")
+        femail = request.form.get("email")
+        fusername = request.form.get("username")
+        fpassword = request.form.get("password")
+        hashedPassword = hashlib.sha256(fpassword.encode()).hexdigest()
+
+        try:
+            models.User.get(models.User.username == fusername)
+        except peewee.DoesNotExist:
+            models.User.create(role=frole, nama=fnama, email=femail,
+                               username=fusername, password=hashedPassword)
+            flash("Berhasil Membuat Akun", "success")
+            return redirect(url_for("userManager"))
+        flash("Gagal Membuat Akun, Username sudah digunakan", "failed")
+        return redirect(url_for("userManager"))
+    flash("Silahkan Login terlebih dahulu", "failed")
+    return redirect(url_for("login"))
+
+
+@app.route("/usermanager/delete/<username>", methods=["GET", "POST"])
+def deleteUser(username):
+    if 'username' in session:
+        fusername = username
+        models.User.delete().where(models.User.username == fusername).execute()
+        flash("Berhasil menghapus User dengan Username "+fusername, "success")
+        return redirect(url_for("userManager"))
+    flash("Silahkan Login Terlebih Dahulu", "failed")
+    return redirect(url_for("login"))
+
+
+# End Halaman User Manager
+
+# Halaman Role Manager
+@app.route("/rolemanager", methods=["GET"])
+def roleManager():
+    if 'username' in session:
+        return render_template("roleManager.html", icon=icon, title="Role Manager")
+    return redirect(url_for("login"))
+# End Halaman Role Manager
+
+
 # Halaman Akun
 
 
