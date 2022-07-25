@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block body %}
+<div class="hidden" id="modalEditUser">{% include "modalEditUser.html" %}</div>
 <div>
   {% with messages = get_flashed_messages(with_categories=true) %} {% for
   category,message in messages %}
@@ -10,18 +11,18 @@
 
   {% endfor %} {% endwith %}
   <div class="m-3 rounded-xl border-2">
-    <div class="flex justify-center">
-      <h2 class="text-xl font-semibold underline">MENAMBAHKAN AKUN BARU</h2>
+    <div class="flex justify-center my-3">
+      <h2 class="text-2xl font-semibold underline">Membuat Akun Baru</h2>
     </div>
     <form action="/usermanager/add" method="POST" class="w-full">
       <div class="sm:flex sm:justify-center">
-        <div class="relative p-2 grid md:grid-cols-2 lg:grid-cols-4">
+        <div class="p-2 grid md:grid-cols-2 lg:grid-cols-4">
           <div class="w-full px-2">
-            <label for="role" class="block text-sm">Nama:</label>
+            <label for="role" class="block text-sm">Role:</label>
             <select
               name="role"
               id="role"
-              class="border-2 outline-none w-full ml-2 rounded-md"
+              class="border-2 outline-none w-full ml-2 rounded-md px-2 py-1"
             >
               <option value="user">User</option>
               <option value="admin">Administrator</option>
@@ -34,7 +35,7 @@
             <input
               type="text"
               name="nama"
-              class="ml-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500"
+              class="ml-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500 px-2 py-1"
               placeholder="Nama"
               required
             />
@@ -44,7 +45,7 @@
             <input
               type="email"
               name="email"
-              class="ml-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500"
+              class="ml-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500 px-2 py-1"
               placeholder="E-mail"
               required
             />
@@ -54,7 +55,7 @@
             <input
               type="text"
               name="username"
-              class="ml-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500"
+              class="ml-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500 px-2 py-1"
               placeholder="Username"
               required
             />
@@ -64,7 +65,7 @@
             <input
               type="password"
               name="password"
-              class="ml-2 px-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500"
+              class="ml-2 w-full rounded-md border-2 outline-none md:w-auto invalid:border-red-500 px-2 py-1"
               placeholder="Password"
               required
             />
@@ -75,15 +76,15 @@
         <input
           type="submit"
           value="Tambahkan"
-          class="cursor-pointer rounded-md bg-green-500 py-1 px-2 text-white"
+          class="cursor-pointer rounded-md bg-green-400 hover:bg-green-500 py-1 px-2 text-white"
         />
       </div>
     </form>
   </div>
   <div class="mx-2 overflow-auto sm:flex sm:justify-center">
     <div>
-      <div class="flex justify-center">
-        <h2 class="text-xl font-semibold underline">TABLE AKUN</h2>
+      <div class="flex justify-center my-3">
+        <h2 class="text-2xl font-semibold underline">Data Akun</h2>
       </div>
       <table class="my-3 table-auto border-2">
         <tr class="border-2 bg-gray-200">
@@ -101,7 +102,10 @@
           <td class="px-2">{{ row.username }}</td>
           <td class="px-2">
             <div class="my-1">
-              <button class="rounded-md bg-blue-500 px-2 py-1 text-white">
+              <button
+                class="ubah-user rounded-md bg-blue-500 px-2 py-1 text-white"
+                data-username="{{ row.username }}"
+              >
                 Ubah
               </button>
               <a
@@ -118,5 +122,14 @@
     </div>
   </div>
 </div>
+<script>
+  $(".ubah-user").click(function () {
+    var username = $(this).data("username");
 
+    $("#modalEditUser").removeClass("hidden");
+  });
+  $(".close-modal").click(function () {
+    $("#modalEditUser").addClass("hidden");
+  });
+</script>
 {% endblock %}

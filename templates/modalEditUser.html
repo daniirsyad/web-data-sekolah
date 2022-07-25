@@ -1,0 +1,101 @@
+<div class="fixed -inset-0 bg-black bg-opacity-5 overflow-hidden">
+  <div class="flex h-screen w-screen items-center justify-center">
+    <div class="rounded-xl bg-white py-6 px-5">
+      <div class="flex items-center justify-between border-b-2 pb-2">
+        <div>
+          <h1 class="text-xl font-bold">Edit User</h1>
+        </div>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 close-modal cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <div class="py-3">
+          <form action="/usermanager/edit/" method="POST">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3">
+              <div class="mb-2 w-11/12">
+                <label for="role" class="block text-sm font-medium">Role</label>
+                <select
+                  name="role"
+                  id="role"
+                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="mb-2 w-11/12">
+                <label for="nama" class="block text-sm font-medium">Nama</label>
+                <input
+                  type="text"
+                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
+                  placeholder="Nama"
+                />
+              </div>
+              <div class="mb-2 w-11/12">
+                <label for="email" class="block text-sm font-medium"
+                  >E-mail</label
+                >
+                <input
+                  type="email"
+                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
+                  placeholder="example@domain.com"
+                />
+              </div>
+              <div class="mb-2 w-11/12">
+                <label for="username" class="block text-sm font-medium"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
+                  placeholder="Username"
+                />
+              </div>
+              <div class="mb-2 w-11/12">
+                <label for="Password" class="block text-sm font-medium"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="mb-2 w-11/12">
+                <label for="retypePassword" class="block text-sm font-medium"
+                  >Re-Type Password</label
+                >
+                <input
+                  type="retypePassword"
+                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
+                  placeholder="Re-Type Password"
+                />
+              </div>
+            </div>
+            <div class="flex justify-end pt-2 pr-2">
+              <input
+                type="submit"
+                value="Simpan"
+                class="cursor-pointer rounded-md bg-green-500 px-2 py-1 text-white hover:bg-green-600"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
