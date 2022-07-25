@@ -205,7 +205,7 @@ def deletesiswa(nis):
     return redirect(url_for("login"))
 
 
-# Halaman Rapor Siswa
+# Halaman Rapor Nilai Siswa
 @app.route("/raporsiswa", methods=["POST", "GET"])
 def raporsiswa():
     if 'username' in session:
@@ -219,14 +219,14 @@ def updateRaporSiswa(nis):
     if 'username' in session:
         fnis = nis
         fsemester = request.form.get("semester")
-        fmtk = request.form.get("mtk")
-        fipa = request.form.get("ipa")
-        fips = request.form.get("ips")
-        fbindo = request.form.get("bindo")
-        fbingg = request.form.get("bingg")
-        ffisika = request.form.get("fisika")
-        fkimia = request.form.get("kimia")
-        fsejarah = request.form.get("sejarah")
+        fmtk = request.form.get("mtk") or '0'
+        fipa = request.form.get("ipa") or '0'
+        fips = request.form.get("ips") or '0'
+        fbindo = request.form.get("bindo") or '0'
+        fbingg = request.form.get("bingg") or '0'
+        ffisika = request.form.get("fisika") or '0'
+        fkimia = request.form.get("kimia") or '0'
+        fsejarah = request.form.get("sejarah") or '0'
 
         models.Nilai.update(mtk=fmtk, ipa=fipa, ips=fips, bindo=fbindo, bingg=fbingg, fisika=ffisika,
                             kimia=fkimia, sejarah=fsejarah).where(models.Nilai.nis == fnis, models.Nilai.semester == fsemester).execute()
@@ -239,21 +239,30 @@ def addRaporSiswa(nis):
     if 'username' in session:
         fnis = nis
         fsemester = request.form.get("semester")
-        fmtk = request.form.get("mtk")
-        fipa = request.form.get("ipa")
-        fips = request.form.get("ips")
-        fbindo = request.form.get("bindo")
-        fbingg = request.form.get("bingg")
-        ffisika = request.form.get("fisika")
-        fkimia = request.form.get("kimia")
-        fsejarah = request.form.get("sejarah")
+        fmtk = request.form.get("mtk") or '0'
+        fipa = request.form.get("ipa") or '0'
+        fips = request.form.get("ips") or '0'
+        fbindo = request.form.get("bindo") or '0'
+        fbingg = request.form.get("bingg") or '0'
+        ffisika = request.form.get("fisika") or '0'
+        fkimia = request.form.get("kimia") or '0'
+        fsejarah = request.form.get("sejarah") or '0'
 
         models.Nilai.create(nis=fnis, semester=fsemester, mtk=fmtk, ipa=fipa, ips=fips, bindo=fbindo, bingg=fbingg, fisika=ffisika,
                             kimia=fkimia, sejarah=fsejarah)
         flash("Berhasil menambahkan Nilai pada nis "+fnis, "success")
         return redirect(url_for("raporsiswa"))
     return redirect(url_for("login"))
-# End Halaman Rapor Siswa
+# End Halaman Rapor Nilai Siswa
+
+# Halaman Rapor Sikap Siswa
+@app.route("/raporsikapsiswa", methods=["GET"])
+def raporSikapSiswa():
+    if 'username' in session:
+        dataSiswa = models.Siswa.select(models.Siswa.nis, models.Siswa.nama)
+        return render_template("raporSikapSiswa.html", icon=icon, title="Rapor Sikap Siswa", dataSiswa=dataSiswa)
+    return redirect(url_for("login"))
+# End Halaman Rapor Sikap Siswa
 
 # Halaman User Manager
 
