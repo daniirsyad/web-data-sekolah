@@ -256,6 +256,8 @@ def addRaporSiswa(nis):
 # End Halaman Rapor Nilai Siswa
 
 # Halaman Rapor Sikap Siswa
+
+
 @app.route("/raporsikapsiswa", methods=["GET"])
 def raporSikapSiswa():
     if 'username' in session:
@@ -298,6 +300,32 @@ def addUser():
     return redirect(url_for("login"))
 
 
+@app.route("/usermanager/edit/<username>", methods=["POST"])
+def editUser(username):
+    if 'username' in session:
+        fusername = request.form.get("username")
+        frole = request.form.get("role")
+        fnama = request.form.get("nama")
+        femail = request.form.get("email")
+        fpassword = hashlib.sha256(
+            request.form.get("password").encode()).hexdigest()
+        frepassword = hashlib.sha256(request.form.get(
+            "retypepassword").encode()).hexdigest()
+
+        if fpassword or frepassword:
+            models.User.update(username=fusername, role=frole, nama=fnama, email=femail, password=fpassword).where(
+                models.User.username == username).execute()
+            flash("Berhasil Update Data User", "success")
+            return redirect(url_for("userManager"))
+
+        models.User.update(username=fusername, role=frole, nama=fnama, email=femail).where(
+            models.User.username == username).execute()
+        return redirect(url_for("userManager"))
+
+    flash("Silahkan Login Terlebih Dahulu", "failed")
+    return redirect(url_for("login"))
+
+
 @app.route("/usermanager/delete/<username>", methods=["GET", "POST"])
 def deleteUser(username):
     if 'username' in session:
@@ -309,9 +337,20 @@ def deleteUser(username):
     return redirect(url_for("login"))
 
 
+@app.route("/usermanager/getuser/<username>", methods=["GET"])
+def getUser(username):
+    if 'username' in session:
+        fusername = username
+        dataUser = models.User.get(models.User.username == fusername)
+        value = model_to_dict(dataUser)
+        return {"value": value}
+    return redirect(url_for("login"))
+
 # End Halaman User Manager
 
 # Halaman Role Manager
+
+
 @app.route("/rolemanager", methods=["GET"])
 def roleManager():
     if 'username' in session:

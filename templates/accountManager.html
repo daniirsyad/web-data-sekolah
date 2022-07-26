@@ -125,11 +125,49 @@
 <script>
   $(".ubah-user").click(function () {
     var username = $(this).data("username");
+    $.ajax({
+      url: "/usermanager/getuser/" + username,
+      dataType: "json",
+      type: "GET",
+      success: function (data) {
+        value = data.value;
 
+        $("#modalEditUserForm").trigger("reset");
+        $("#modalEditUserForm input[type='submit']").prop("disabled", false);
+        $("#labelCPassword").hide();
+        $("#modalEditUserForm").attr(
+          "action",
+          "/usermanager/edit/" + value.username
+        );
+        $("#modalEditUserForm select[name='role']").val(value.role);
+        $("#modalEditUserForm input[name='nama']").val(value.nama);
+        $("#modalEditUserForm input[name='email']").val(value.email);
+        $("#modalEditUserForm input[name='username']").val(value.username);
+      },
+    });
     $("#modalEditUser").removeClass("hidden");
   });
   $(".close-modal").click(function () {
     $("#modalEditUser").addClass("hidden");
+  });
+
+  $.fn.checkPassword = function () {
+    console.log("Press");
+    password = $("#editUserFormPassword").val();
+    confirmPassword = $("#editUserFormRetypepassword").val();
+    if (password != confirmPassword) {
+      $("#labelCPassword").show();
+      $("#modalEditUserForm input[type='submit']").prop("disabled", true);
+    } else {
+      $("#labelCPassword").hide();
+      $("#modalEditUserForm input[type='submit']").prop("disabled", false);
+    }
+  };
+  $(document).ready(function () {
+    $("#modalEditUserForm input[name='retypepassword']").keyup(
+      $.fn.checkPassword
+    );
+    $("#modalEditUserForm input[name='password']").keyup($.fn.checkPassword);
   });
 </script>
 {% endblock %}

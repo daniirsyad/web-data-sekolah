@@ -24,7 +24,7 @@
       </div>
       <div>
         <div class="py-3">
-          <form action="/usermanager/edit/" method="POST">
+          <form action="" method="POST" id="modalEditUserForm">
             <div class="grid md:grid-cols-2 lg:grid-cols-3">
               <div class="mb-2 w-11/12">
                 <label for="role" class="block text-sm font-medium">Role</label>
@@ -41,6 +41,7 @@
                 <label for="nama" class="block text-sm font-medium">Nama</label>
                 <input
                   type="text"
+                  name="nama"
                   class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
                   placeholder="Nama"
                 />
@@ -51,6 +52,7 @@
                 >
                 <input
                   type="email"
+                  name="email"
                   class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
                   placeholder="example@domain.com"
                 />
@@ -61,6 +63,7 @@
                 >
                 <input
                   type="text"
+                  name="username"
                   class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
                   placeholder="Username"
                 />
@@ -71,6 +74,8 @@
                 >
                 <input
                   type="password"
+                  name="password"
+                  id="editUserFormPassword"
                   class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
                   placeholder="Password"
                 />
@@ -80,10 +85,17 @@
                   >Re-Type Password</label
                 >
                 <input
-                  type="retypePassword"
-                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
+                  type="password"
+                  name="retypepassword"
+                  id="editUserFormRetypepassword"
+                  class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none block"
                   placeholder="Re-Type Password"
                 />
+                <span
+                  class="ml-2 text-sm font-medium text-red-500 hidden"
+                  id="labelCPassword"
+                  >Passoword Tidak Sama!</span
+                >
               </div>
             </div>
             <div class="flex justify-end pt-2 pr-2">
