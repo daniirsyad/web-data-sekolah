@@ -33,8 +33,9 @@
                   id="role"
                   class="ml-2 w-full rounded-md bg-gray-100 py-1 px-2 outline-none"
                 >
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
+                  {% for role in dataRole %}
+                  <option value="{{ role.nama }}">{{ role.nama }}</option>
+                  {% endfor %}
                 </select>
               </div>
               <div class="mb-2 w-11/12">

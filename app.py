@@ -29,7 +29,6 @@ def setListSemester(nis):
     for x in dataList:
         if x.semester in dataSemester:
             dataSemester.remove(x.semester)
-    print(dataSemester)
     return dataSemester
 
 
@@ -273,7 +272,8 @@ def raporSikapSiswa():
 def userManager():
     if 'username' in session:
         dataUser = models.User.select()
-        return render_template("accountManager.html", icon=icon, title="User Manager", data=dataUser)
+        dataRole = models.Role.select()
+        return render_template("accountManager.html", icon=icon, title="User Manager", data=dataUser, dataRole=dataRole)
     return redirect(url_for("login"))
 
 
@@ -351,10 +351,22 @@ def getUser(username):
 # Halaman Role Manager
 
 
-@app.route("/rolemanager", methods=["GET"])
+@app.route("/rolemanager", methods=["GET", "POST"])
 def roleManager():
     if 'username' in session:
-        return render_template("roleManager.html", icon=icon, title="Role Manager")
+        if request.method == 'POST':
+            fnama = request.form.get("namaRole")
+            fusermanager = request.form.get("usermanager") or '0'
+            frolemanager = request.form.get("rolemanager") or '0'
+            fprofilesiswa = request.form.get("profilesiswa") or '0'
+            fraporsiswa = request.form.get("raporsiswa") or '0'
+            fkomentar = request.form.get("komentar")
+
+            models.Role.create(nama=fnama, usermanager=fusermanager, rolemanager=frolemanager,
+                               profilemanager=fprofilesiswa, raporsiswa=fraporsiswa, komentar=fkomentar)
+            return redirect(url_for("roleManager"))
+        dataRole = models.Role.select()
+        return render_template("roleManager.html", icon=icon, title="Role Manager", dataRole=dataRole)
     return redirect(url_for("login"))
 # End Halaman Role Manager
 

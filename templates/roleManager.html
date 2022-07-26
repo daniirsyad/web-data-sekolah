@@ -5,7 +5,7 @@
       <h2 class="text-2xl font-semibold underline my-3">Membuat Role Baru</h2>
     </div>
     <div>
-      <form action="">
+      <form action="/rolemanager" method="POST">
         <div class="">
           <div class="w-1/2">
             <label
@@ -137,35 +137,35 @@
               <th class="p-2">Komentar</th>
             </tr>
           </thead>
+          {% for role in dataRole %}
           <tr class="border-t even:bg-gray-100">
-            <td class="p-3">1</td>
-            <td class="p-3">staff</td>
+            <td class="p-3">{{ loop.index }}</td>
+            <td class="p-3">{{ role.nama }}</td>
             <td class="p-3">
-              <ul class="list-outside list-disc">
-                <li>Akses User Manager</li>
-                <li>Akses Role Manager</li>
-                <li>Akses Rapor Siswa</li>
+              <ul class="list-outside list-disc" id="listAkses">
+                <li data-value="{{ role.usermanager }}">Akses User Manager</li>
+                <li data-value="{{ role.rolemanager }}">Akses Role Manager</li>
+                <li data-value="{{ role.raporsiswa }}">Akses Rapor Siswa</li>
+                <li data-value="{{ role.raporsiswa }}">Akses Rapor Siswa</li>
               </ul>
             </td>
-            <td class="p-3 italic">Digunakan untuk para staff</td>
+            <td class="p-3 italic max-w-xl"><p>{{ role.komentar }}</p></td>
           </tr>
-          <tr class="border-t even:bg-gray-100">
-            <td class="p-3">2</td>
-            <td class="p-3">admin</td>
-            <td class="p-3">
-              <ul class="list-outside list-disc">
-                <li>Akses User Manager</li>
-                <li>Akses Role Manager</li>
-                <li>Akses Rapor Siswa</li>
-                <li>Akses Profile Siswa</li>
-              </ul>
-            </td>
-            <td class="p-3 italic">Digunakan untuk para staff</td>
-          </tr>
+          {% endfor %}
         </table>
       </div>
     </div>
   </div>
 </div>
-
+<script>
+  $(document).ready(function () {
+    $("#listAkses li").each(function () {
+      $(this)
+        .filter(function () {
+          return $(this).data("value") === 0;
+        })
+        .hide();
+    });
+  });
+</script>
 {% endblock %}

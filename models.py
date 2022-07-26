@@ -83,5 +83,19 @@ class Nilai(Model):
         db_table = "tbl_siswa_nilai"
 
 
+class Role(Model):
+    id = IntegerField()
+    nama = CharField()
+    usermanager = CharField()
+    rolemanager = CharField()
+    profilesiswa = CharField()
+    raporsiswa = CharField()
+    komentar = TextField()
+
+    class Meta:
+        database = db
+        db_table = "tbl_role"
+
+
 def initialize():
     db.connect()

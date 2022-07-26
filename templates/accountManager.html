@@ -24,10 +24,9 @@
               id="role"
               class="border-2 outline-none w-full ml-2 rounded-md px-2 py-1"
             >
-              <option value="user">User</option>
-              <option value="admin">Administrator</option>
-              <option value="staff">Staff</option>
-              <option value="siswa">Siswa</option>
+              {% for role in dataRole %}
+              <option value="{{ role.nama }}">{{ role.nama }}</option>
+              {% endfor %}
             </select>
           </div>
           <div class="w-full px-2">
