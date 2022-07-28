@@ -82,6 +82,17 @@ class Nilai(Model):
         database = db
         db_table = "tbl_siswa_nilai"
 
+class Sikap(Model):
+    id = IntegerField()
+    nis = CharField()
+    tguru = CharField()
+    tstaff = CharField()
+    tteman = CharField()
+    tlingkungan = CharField()
+
+    class Meta:
+        database = db
+        db_table = "tbl_siswa_sikap"
 
 class Role(Model):
     id = IntegerField()

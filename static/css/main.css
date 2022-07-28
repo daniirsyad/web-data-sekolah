@@ -1042,6 +1042,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   overflow-y: hidden;
 }
 
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
