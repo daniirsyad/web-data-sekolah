@@ -35,10 +35,22 @@
         id="container-{{ siswa.nis }}"
         class="w-full border bg-gray-50 px-3 py-2 hidden"
       >
-        <div class="bg-white p-2">
-          <div>
+        <div class="bg-white p-2 overflow-x-auto max-h-96 overflow-y-auto">
+          <div class="border rounded-xl p-2">
+            <div><h2 class="mb-2 text-xl font-semibold">Tambah Baru</h2></div>
             <form action="">
               <div>
+                <div class="pb-2">
+                  <label for="semester">Semester</label>
+                  <select
+                    name="semester"
+                    id="semester"
+                    class="w-full rounded-md border px-2 py-1 outline-none"
+                    required
+                  >
+                    <option value="">Semester 1</option>
+                  </select>
+                </div>
                 <div class="pb-2">
                   <label for="guru" class="block text-sm font-medium"
                     >Terhadap Guru</label
@@ -47,6 +59,7 @@
                     name="guru"
                     id="guru"
                     class="w-full rounded-md border px-2 py-1 outline-none"
+                    required
                   >
                     <option value="a">Baik Sekali</option>
                     <option value="b">Baik</option>
@@ -63,6 +76,7 @@
                     name="staff"
                     id="staff"
                     class="w-full rounded-md border px-2 py-1 outline-none"
+                    required
                   >
                     <option value="a">Baik Sekali</option>
                     <option value="b">Baik</option>
@@ -79,6 +93,7 @@
                     name="teman"
                     id="teman"
                     class="w-full rounded-md border px-2 py-1 outline-none"
+                    required
                   >
                     <option value="a">Baik Sekali</option>
                     <option value="b">Baik</option>
@@ -95,6 +110,7 @@
                     name="lingkungan"
                     id="lingkungan"
                     class="w-full rounded-md border px-2 py-1 outline-none"
+                    required
                   >
                     <option value="a">Baik Sekali</option>
                     <option value="b">Baik</option>
@@ -113,13 +129,51 @@
               </div>
             </form>
           </div>
+          <div class="flex md:justify-center">
+            <div class="p-3">
+              <table class="table-auto">
+                <tr class="bg-gray-300">
+                  <th class="border-2 border-gray-400 bg-gray-400 px-3">
+                    Semester
+                  </th>
+                  <th class="border-2 border-gray-400 px-3">Terhadap Guru</th>
+                  <th class="border-2 border-gray-400 px-3">Terhadap Staff</th>
+                  <th class="border-2 border-gray-400 px-3">Terhadap Teman</th>
+                  <th class="border-2 border-gray-400 px-3">
+                    Terhadap Lingkungan
+                  </th>
+                  <th class="border-2 border-gray-400 px-3">Aksi</th>
+                </tr>
+                <form action="" method="POST">
+                  <tr>
+                    <td
+                      class="border-2 border-gray-300 bg-gray-300 text-center"
+                    >
+                      Semester 1
+                    </td>
+                    <td class="border-2 border-gray-300 text-center"></td>
+                    <td class="border-2 border-gray-300 text-center"></td>
+                    <td class="border-2 border-gray-300 text-center"></td>
+                    <td class="border-2 border-gray-300 text-center"></td>
+                    <td class="border-2 border-gray-300 text-center">
+                      <input
+                        type="submit"
+                        value="Simpan"
+                        class="m-1 cursor-pointer rounded-md bg-blue-500 px-2 py-1 text-white hover:bg-blue-600"
+                      />
+                    </td>
+                  </tr>
+                </form>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 {% endfor %}
+
 <script>
   $(".show-data[data-nis]").click(function () {
     $("#" + $(this).data("nis")).toggleClass("hidden");

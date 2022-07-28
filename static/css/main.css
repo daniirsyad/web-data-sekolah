@@ -803,6 +803,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-height: 18rem;
 }
 
+.max-h-96 {
+  max-height: 24rem;
+}
+
 .w-full {
   width: 100%;
 }
@@ -1975,6 +1979,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:justify-start {
     justify-content: flex-start;
+  }
+
+  .md\:justify-center {
+    justify-content: center;
   }
 
   .md\:text-left {
