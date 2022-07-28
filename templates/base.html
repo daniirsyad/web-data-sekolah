@@ -19,16 +19,16 @@
     <!-- End Head -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
+  <header>{% include 'header.html' %}</header>
   <body class="font-mono">
-    {% include 'header.html' %}
     <div class="flex">
-      <div class="bg-gray-100">{% include 'sidebar.html' %}</div>
-      <div class="container px-4 py-10 overflow-y-hidden">
+      <div>{% include 'sidebar.html' %}</div>
+      <div class="container px-4 py-10">
         <!-- Start Body -->
         {% block body %} {% endblock %}
         <!-- End Body -->
       </div>
     </div>
-    {% include 'bubble.html' %} {% include 'footer.html' %}
   </body>
+  {% include 'bubble.html' %} {% include 'footer.html' %}
 </html>

@@ -1,129 +1,107 @@
-<aside id="sidebarroot" class="w-64 sm:w-64 relative">
-  <div
-    id="showbtn"
-    class="absolute flex justify-center cursor-pointer rounded-full border-2 border-gray-800 text-xl px-1 bg-gray-50 -right-6 top-40 sm:hidden"
+<div class="h-full overflow-y-auto bg-gray-100 p-2 md:w-52">
+  <a
+    href="/"
+    class="mb-2 block rounded-md bg-gray-100 p-2 text-sm font-medium hover:bg-gray-200"
+    title="Profile Siswa"
+    ><div class="flex items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+        /></svg
+      ><span class="ml-2 hidden md:block">Profile Siswa</span>
+    </div></a
   >
-    <i class="fas fa-angle-right"></i>
-  </div>
-  <div class="overflow-x-hidden">
-    <div class="overflow-y-auto py-4 px-3 bg-gray-100 block h-">
-      <ul class="space-y-2">
-        <li>
-          <a
-            href="/"
-            class="flex item-center p-2 text-base rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700 bg-gray-200 text-gray-700"
-            ><div class="flex items-center ml-3">
-              <i class="fas fa-columns"></i>
-            </div>
-            <span class="ml-3">Profile Siswa</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="/raporsiswa"
-            class="flex item-center p-2 text-base rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700 bg-gray-100 text-gray-700"
-            ><div class="flex items-center ml-3">
-              <i class="fas fa-columns"></i>
-            </div>
-            <span class="ml-3">Rapor Nilai Siswa</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="/raporsikapsiswa"
-            class="flex item-center p-2 text-base rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700 bg-gray-100 text-gray-700"
-            ><div class="flex items-center ml-3">
-              <i class="fas fa-columns"></i>
-            </div>
-            <span class="ml-3">Rapor Sikap Siswa</span>
-          </a>
-        </li>
-        <li>
-          <button
-            type="button"
-            id="dropdownbtn"
-            class="flex items-center p-2 w-full text-base bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
-          >
-            <div class="flex items-center ml-3">
-              <i class="fas fa-users"></i>
-            </div>
-            <span class="flex-1 ml-3 text-left whitespace-nowrap">Manager</span>
-            <i id="dropdownarrow" class="fas fa-caret-down"></i>
-          </button>
-          <ul id="dropdown-ul-1" class="space-y-2 overflow-hidden py-2">
-            <li>
-              <a
-                href="/usermanager"
-                class="flex items-center ml-11 p-2 pl-3 text-base text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
-                ><div class="flex items-center ml-3">
-                  <i class="fas fa-user"></i>
-                </div>
-                <span class="ml-3"> User Manager </span></a
-              >
-            </li>
-            <li>
-              <a
-                href="/rolemanager"
-                class="flex items-center ml-11 p-2 pl-3 text-base text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
-                ><div class="flex items-center ml-3">
-                  <i class="fas fa-key"></i>
-                </div>
-                <span class="ml-3"> Role Manager </span></a
-              >
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <a
-            href="#"
-            class="flex item-center p-2 text-base text-gray-600 rounded-lg hover:bg-gray-00 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
-          >
-            <div class="flex items-center ml-3">
-              <i class="fas fa-database"></i>
-            </div>
-            <span class="ml-3"> Database </span>
-          </a>
-        </li>
-      </ul>
-      <ul class="space-y-2 border-t border-gray-600">
-        <li>
-          <a
-            href="/logout"
-            class="flex item-center p-2 text-base text-gray-600 rounded-lg hover:bg-gray-200 hover:text-gray-700 active:bg-gray-200 active:text-gray-700"
-          >
-            <div class="flex items-center ml-3">
-              <i class="fas fa-sign-out-alt"></i>
-            </div>
-            <span class="ml-3"> Keluar </span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</aside>
-<script>
-  $(document).ready(function () {
-    $("#showbtn").click(function () {
-      $("#sidebarroot").toggleClass("w-0");
-    });
-    $("#dropdownbtn").click(function () {
-      var x = $("ul#dropdown-ul-1 li").length * 50 + 16;
-      if ($("#dropdownbtn").hasClass("bg-gray-200")) {
-        $("#dropdownbtn").removeClass("bg-gray-200 text-gray-700");
-        $("#dropdownbtn").addClass("bg-gray-100 text-gray-600");
-        $("#dropdown-ul-1").animate({
-          height: "toggle",
-        });
-        $("#dropdownarrow").removeClass("rotate-180");
-      } else {
-        $("#dropdownbtn").addClass("bg-gray-200 text-gray-700");
-        $("#dropdownbtn").removeClass("bg-gray-100 text-gray-600");
-        $("#dropdown-ul-1").animate({
-          height: "toggle",
-        });
-        $("#dropdownarrow").addClass("rotate-180");
-      }
-    });
-  });
-</script>
+  <a
+    href="/raporsiswa"
+    class="mb-2 block rounded-md bg-gray-100 p-2 text-sm font-medium hover:bg-gray-200"
+    title="Rapor Nilai Siswa"
+    ><div class="flex items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+        /></svg
+      ><span class="ml-2 hidden md:block">Rapor Nilai Siswa</span>
+    </div></a
+  >
+  <a
+    href="raporsikapsiswa"
+    class="mb-2 block rounded-md bg-gray-100 p-2 text-sm font-medium hover:bg-gray-200"
+    title="Rapor Sikap Siswa"
+    ><div class="flex items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+        /></svg
+      ><span class="ml-2 hidden md:block">Rapor Sikap Siswa</span>
+    </div></a
+  >
+  <a
+    href="/usermanager"
+    class="mb-2 block rounded-md bg-gray-100 p-2 text-sm font-medium hover:bg-gray-200"
+    title="Role Manager"
+    ><div class="flex items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+        /></svg
+      ><span class="ml-2 hidden md:block">Role Manager</span>
+    </div></a
+  >
+  <a
+    href="/rolemanager"
+    class="mb-2 block rounded-md bg-gray-100 p-2 text-sm font-medium hover:bg-gray-200"
+    title="User Manager"
+    ><div class="flex items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        /></svg
+      ><span class="ml-2 hidden md:block">User Manager</span>
+    </div></a
+  >
+</div>

@@ -585,6 +585,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 10rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .m-3 {
   margin: 0.75rem;
 }
@@ -721,6 +725,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ml-11 {
   margin-left: 2.75rem;
+}
+
+.ml-20 {
+  margin-left: 5rem;
 }
 
 .block {
@@ -1746,11 +1754,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-gray-50:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-
 .hover\:text-gray-100:hover {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
@@ -1934,6 +1937,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 768px) {
+  .md\:ml-52 {
+    margin-left: 13rem;
+  }
+
+  .md\:block {
+    display: block;
+  }
+
   .md\:w-auto {
     width: auto;
   }
@@ -1944,6 +1955,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-8\/12 {
     width: 66.666667%;
+  }
+
+  .md\:w-48 {
+    width: 12rem;
+  }
+
+  .md\:w-52 {
+    width: 13rem;
   }
 
   .md\:grid-cols-2 {
