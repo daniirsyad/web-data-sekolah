@@ -1,0 +1,124 @@
+<div class="fixed inset-0 h-screen w-screen bg-gray-900 bg-opacity-50">
+  <div class="relative flex h-screen w-screen items-center justify-center p-5">
+    <div
+      class="relative my-3 w-11/12 overflow-hidden rounded-xl bg-white p-4 sm:w-10/12 md:w-8/12 lg:w-3/5"
+    >
+      <div class="flex items-center justify-between bg-white pb-5">
+        <h1 class="text-2xl font-bold">UBAH NILAI SIKAP</h1>
+        <button class="closeModal" type="button" title="close">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <form action="/raporsikapsiswa/update" method="POST" id="modalSikapForm">
+        <div
+          class="h-screen-md relative overflow-y-auto rounded-lg border-2 py-3 shadow-inner shadow-gray-200"
+        >
+          <div class="h-full px-3">
+            <div class="mb-3 hidden">
+              <label for="semester" class="block">Semester</label>
+              <input
+                type="text"
+                name="semester"
+                placeholder="semester"
+                class="w-full rounded-md border px-2 py-1"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="guru" class="block text-sm font-medium"
+                >Terhadap Guru</label
+              >
+              <select
+                name="guru"
+                id="guru"
+                class="w-full rounded-md border px-2 py-1"
+              >
+                <option value="a">Baik Sekali</option>
+                <option value="b">Baik</option>
+                <option value="c">Cukup</option>
+                <option value="d">Kurang</option>
+                <option value="e">Sangat Kurang</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="staff" class="block text-sm font-medium"
+                >Terhadap Staff</label
+              >
+              <select
+                name="staff"
+                id="staff"
+                class="w-full rounded-md border px-2 py-1"
+              >
+                <option value="a">Baik Sekali</option>
+                <option value="b">Baik</option>
+                <option value="c">Cukup</option>
+                <option value="d">Kurang</option>
+                <option value="e">Sangat Kurang</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="teman" class="block text-sm font-medium"
+                >Terhadap Teman</label
+              >
+              <select
+                name="teman"
+                id="teman"
+                class="w-full rounded-md border px-2 py-1"
+              >
+                <option value="a">Baik Sekali</option>
+                <option value="b">Baik</option>
+                <option value="c">Cukup</option>
+                <option value="d">Kurang</option>
+                <option value="e">Sangat Kurang</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="lingkungan" class="block text-sm font-medium"
+                >Terhadap Lingkungan</label
+              >
+              <select
+                name="lingkungan"
+                id="lingkungan"
+                class="w-full rounded-md border px-2 py-1"
+              >
+                <option value="a">Baik Sekali</option>
+                <option value="b">Baik</option>
+                <option value="c">Cukup</option>
+                <option value="d">Kurang</option>
+                <option value="e">Sangat Kurang</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="relative flex justify-end py-3">
+          <div class="flex justify-between gap-2">
+            <button
+              class="closeModal btn-close-modal rounded-md bg-red-500 py-2 px-3 text-white hover:bg-red-600"
+              type="button"
+            >
+              Batal
+            </button>
+            <button
+              class="rounded-md bg-blue-500 py-2 px-3 text-white hover:bg-blue-600"
+              type="submit"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

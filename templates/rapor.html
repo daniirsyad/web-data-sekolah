@@ -105,7 +105,7 @@ category,message in messages %}
                       id="semester"
                       class="px-2 py-1 border rounded-md outline-none"
                     >
-                      {% for rowSemester in setListSemester(row.nis) %}
+                      {% for rowSemester in getListSemester(row.nis,'nilai') %}
                       <option value="{{ rowSemester }}">
                         Semester {{ rowSemester }}
                       </option>
@@ -215,7 +215,7 @@ category,message in messages %}
                   <th class="border-2 border-gray-400 px-3">Sejarah</th>
                   <th class="border-2 border-gray-400 px-3">Aksi</th>
                 </tr>
-                {% for rowNilai in getNilai(row.nis) %}
+                {% for rowNilai in getNilai(row.nis,'nilai') %}
                 <form action="/raporsiswa/update/{{ row.nis }}" method="POST">
                   <tr>
                     <td
@@ -302,8 +302,8 @@ category,message in messages %}
                       />
                     </td>
                   </tr>
+                  {% endfor %}
                 </form>
-                {% endfor %}
               </table>
             </div>
             <!-- End Container -->

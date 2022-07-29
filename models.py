@@ -1,3 +1,4 @@
+from pandas import NamedAgg
 from peewee import *
 from sqlalchemy import Integer
 
@@ -82,6 +83,7 @@ class Nilai(Model):
         database = db
         db_table = "tbl_siswa_nilai"
 
+
 class Sikap(Model):
     id = IntegerField()
     nis = CharField()
@@ -89,10 +91,22 @@ class Sikap(Model):
     tstaff = CharField()
     tteman = CharField()
     tlingkungan = CharField()
+    semester = CharField()
 
     class Meta:
         database = db
         db_table = "tbl_siswa_sikap"
+
+
+class Sikap_desc(Model):
+    id = IntegerField()
+    kode = CharField()
+    nama = CharField()
+
+    class Meta:
+        database = db
+        db_table = "tbl_siswa_sikap_desc"
+
 
 class Role(Model):
     id = IntegerField()

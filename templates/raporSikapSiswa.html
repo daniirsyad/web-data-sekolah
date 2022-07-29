@@ -1,6 +1,18 @@
 {% extends 'base.html' %} {% block body %}
+<div class="hidden" id="modalSikap">{% include 'modalEditSikap.html' %}</div>
 <div class="flex justify-center mb-5">
   <h2 class="text-2xl font-semibold underline">Rapor Sikap Siswa</h2>
+</div>
+<div class="flex justify-center">
+  {% with messages = get_flashed_messages(with_categories=true) %} {% for
+  category,message in messages %}
+  <div
+    class="w-1/2 {% if category =='failed' %} bg-red-500 border-red-700 {% elif category == 'success' %} bg-green-500 border-gren-700 {% endif %} rounded-md border-2 py-1 text-center text-white w-full text-xs"
+  >
+    <span>{{ message }}</span>
+  </div>
+
+  {% endfor %} {% endwith %}
 </div>
 {% for siswa in dataSiswa %}
 <div>
@@ -38,8 +50,18 @@
         <div class="bg-white p-2 overflow-x-auto max-h-96 overflow-y-auto">
           <div class="border rounded-xl p-2">
             <div><h2 class="mb-2 text-xl font-semibold">Tambah Baru</h2></div>
-            <form action="">
+            <form action="/raporsikapsiswa" method="POST">
               <div>
+                <div class="pb-2 hidden">
+                  <label for="nis">NIS</label>
+                  <input
+                    type="text"
+                    name="nis"
+                    id="nis"
+                    value="{{ siswa.nis }}"
+                    class="w-full rounded-md border px-2 py-1 outline-none"
+                  />
+                </div>
                 <div class="pb-2">
                   <label for="semester">Semester</label>
                   <select
@@ -48,7 +70,11 @@
                     class="w-full rounded-md border px-2 py-1 outline-none"
                     required
                   >
-                    <option value="">Semester 1</option>
+                    {% for semester in getListSemester(siswa.nis,'sikap') %}
+                    <option value="{{ semester }}">
+                      Semester {{ semester }}
+                    </option>
+                    {% endfor %}
                   </select>
                 </div>
                 <div class="pb-2">
@@ -144,26 +170,35 @@
                   </th>
                   <th class="border-2 border-gray-400 px-3">Aksi</th>
                 </tr>
-                <form action="" method="POST">
-                  <tr>
-                    <td
-                      class="border-2 border-gray-300 bg-gray-300 text-center"
+                {% for sikap in getNilai(siswa.nis,'sikap') %}
+                <tr>
+                  <td class="border-2 border-gray-300 bg-gray-300 text-center">
+                    Semester {{ sikap.semester }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ getSikapDesc(sikap.tguru) }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ getSikapDesc(sikap.tstaff) }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ getSikapDesc(sikap.tteman) }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    {{ getSikapDesc(sikap.tlingkungan) }}
+                  </td>
+                  <td class="border-2 border-gray-300 text-center">
+                    <button
+                      id="showModalBtn"
+                      class="bg-blue-500 text-white px-2 py-1 rounded-md my-1"
+                      data-nis="{{ siswa.nis }}"
+                      data-semester="{{ sikap.semester }}"
                     >
-                      Semester 1
-                    </td>
-                    <td class="border-2 border-gray-300 text-center"></td>
-                    <td class="border-2 border-gray-300 text-center"></td>
-                    <td class="border-2 border-gray-300 text-center"></td>
-                    <td class="border-2 border-gray-300 text-center"></td>
-                    <td class="border-2 border-gray-300 text-center">
-                      <input
-                        type="submit"
-                        value="Simpan"
-                        class="m-1 cursor-pointer rounded-md bg-blue-500 px-2 py-1 text-white hover:bg-blue-600"
-                      />
-                    </td>
-                  </tr>
-                </form>
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
               </table>
             </div>
           </div>
@@ -177,6 +212,28 @@
 <script>
   $(".show-data[data-nis]").click(function () {
     $("#" + $(this).data("nis")).toggleClass("hidden");
+  });
+  $("#showModalBtn[data-nis]").click(function () {
+    $("#modalSikap").removeClass("hidden");
+    var nis = $(this).data("nis");
+    var semester = $(this).data("semester");
+    $.ajax({
+      url: "/raporsikapsiswa/getdata?nis=" + nis + "&semester=" + semester,
+      dataType: "json",
+      type: "get",
+      success: function (data) {
+        value = data.value;
+        $("#modalSikapForm").attr("action", "/raporsikapsiswa/update/" + nis);
+        $("#modalSikapForm input[name='semester']").val(value.semester);
+        $("#modalSikapForm select[name='guru']").val(value.tguru);
+        $("#modalSikapForm select[name='staff']").val(value.tstaff);
+        $("#modalSikapForm select[name='teman']").val(value.tteman);
+        $("#modalSikapForm select[name='lingkungan']").val(value.tlingkungan);
+      },
+    });
+  });
+  $(".closeModal").click(function () {
+    $("#modalSikap").addClass("hidden");
   });
 </script>
 {% endblock %}

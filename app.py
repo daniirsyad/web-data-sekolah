@@ -13,30 +13,57 @@ import models
 # Function
 
 
-def getNilai(nis):
-    dataNilai = models.Nilai.select().where(
-        models.Nilai.nis == nis).order_by(models.Nilai.semester.asc())
-    return dataNilai
-
-
-def setListSemester(nis):
+def getNilai(nis, db):
+    fdb = db
     fnis = nis
-    dataList = models.Nilai.select(
-        models.Nilai.semester).where(models.Nilai.nis == fnis).order_by(models.Nilai.semester.asc())
-    # Total Semester
-    dataSemester = ["1", "2", "3", "4", "5",
-                    "6", "7", "8", "9", "10", "11", "12"]
-    for x in dataList:
-        if x.semester in dataSemester:
-            dataSemester.remove(x.semester)
-    return dataSemester
+    if fdb == 'nilai':
+        dataNilai = models.Nilai.select().where(
+            models.Nilai.nis == fnis).order_by(models.Nilai.semester.asc())
+        return dataNilai
+    elif fdb == 'sikap':
+        dataNilai = models.Sikap.select().where(
+            models.Sikap.nis == fnis).order_by(models.Sikap.semester.asc())
+        return dataNilai
+    return print("Argument kedua parameter pada fungsi getNilai Salah")
+
+
+def getSikapDesc(kode):
+    fkode = kode
+    data = models.Sikap_desc.get(models.Sikap_desc.kode == fkode)
+    return data.nama
+
+
+def getListSemester(nis, db):
+    fnis = nis
+    fdb = db
+    if fdb == "nilai":
+        dataList = models.Nilai.select(
+            models.Nilai.semester).where(models.Nilai.nis == fnis).order_by(models.Nilai.semester.asc())
+        # Total Semester
+        dataSemester = ["1", "2", "3", "4", "5",
+                        "6", "7", "8", "9", "10", "11", "12"]
+        for x in dataList:
+            if x.semester in dataSemester:
+                dataSemester.remove(x.semester)
+        return dataSemester
+    elif fdb == "sikap":
+        dataList = models.Sikap.select(models.Sikap.semester).where(
+            models.Sikap.nis == fnis).order_by(models.Sikap.semester.asc())
+
+        dataSemester = ["1", "2", "3", "4", "5",
+                        "6", "7", "8", "9", "10", "11", "12"]
+        for x in dataList:
+            if x.semester in dataSemester:
+                dataSemester.remove(x.semester)
+        return dataSemester
+    return print("Argument kedua Parameter pada fungsi setListSemester Salah")
 
 
 # End Function
 app = Flask(__name__)
 app.secret_key = 'thisismyscretkey123333'
 app.jinja_env.globals.update(
-    getKabupaten=getKabupaten, getKecamatan=getKecamatan, getDesa=getDesa, getNilai=getNilai, setListSemester=setListSemester)
+    getKabupaten=getKabupaten, getKecamatan=getKecamatan, getDesa=getDesa, getNilai=getNilai, getSikapDesc=getSikapDesc, getListSemester=getListSemester)
 
 icon = "/static/images/icon.png"
 
@@ -257,12 +284,60 @@ def addRaporSiswa(nis):
 # Halaman Rapor Sikap Siswa
 
 
-@app.route("/raporsikapsiswa", methods=["GET"])
+@app.route("/raporsikapsiswa", methods=["GET", "POST"])
 def raporSikapSiswa():
     if 'username' in session:
+        if request.method == "POST":
+            fnis = request.form.get("nis")
+            fsemester = request.form.get("semester")
+            ftguru = request.form.get("guru")
+            ftstaff = request.form.get("staff")
+            ftteman = request.form.get("teman")
+            ftlingkungan = request.form.get("lingkungan")
+
+            models.Sikap.create(nis=fnis, tguru=ftguru, tstaff=ftstaff,
+                                tteman=ftteman, tlingkungan=ftlingkungan, semester=fsemester)
+            flash("Berhasil Menmabahkan Data baru", "success")
+            return redirect(url_for("raporSikapSiswa"))
+
         dataSiswa = models.Siswa.select(models.Siswa.nis, models.Siswa.nama)
         return render_template("raporSikapSiswa.html", icon=icon, title="Rapor Sikap Siswa", dataSiswa=dataSiswa)
+    flash("Silahkan Login Terlebih Dahulu", "failed")
     return redirect(url_for("login"))
+
+
+@app.route("/raporsikapsiswa/getdata", methods=["GET"])
+def getRaporSikapSiswa():
+    if 'username' in session:
+        fnis = request.args.get("nis", None)
+        fsemester = request.args.get("semester", None)
+        print(fnis)
+        dataSikap = models.Sikap.get(
+            models.Sikap.nis == fnis, models.Sikap.semester == fsemester)
+        value = model_to_dict(dataSikap)
+
+        return {'value': value}
+    flash("SIlahkan Login Terlebih dahulu", "failed")
+    return redirect(url_for("login"))
+
+
+@app.route("/raporsikapsiswa/update/<nis>", methods=["POST"])
+def updateRaporSikapSiswa(nis):
+    if 'username' in session:
+        fnis = nis
+        fsemester = request.form.get("semester")
+        ftguru = request.form.get("guru")
+        ftstaff = request.form.get("staff")
+        ftteman = request.form.get("teman")
+        ftlingkungan = request.form.get("lingkungan")
+
+        models.Sikap.update(tguru=ftguru, tstaff=ftstaff, tteman=ftteman, tlingkungan=ftlingkungan).where(
+            models.Sikap.nis == fnis, models.Sikap.semester == fsemester).execute()
+        flash("berhasil merubah Data", "success")
+        return redirect(url_for("raporSikapSiswa"))
+    flash("Silahkan Login Terlebih dahulu", "failed")
+    return redirect(url_for("login"))
+
 # End Halaman Rapor Sikap Siswa
 
 # Halaman User Manager
