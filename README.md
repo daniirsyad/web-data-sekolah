@@ -1,4 +1,1 @@
-Program untuk mendata seluruh guru dan siswa sekolah.
-
-dibuat oleh Muhammad Daanii Irsyaad
-
+## This is website that created using Flask Python, TailwindCSS, JQuery
